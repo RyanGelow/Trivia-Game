@@ -49,6 +49,8 @@ const qsAndAs = [
 //  When the start button is clicked, execute the run function.
 $('#start').on('click', fiveSecondCountdown);
 
+
+//Step One:
 function fiveSecondCountdown() {
     // clearInterval(intervalId);
     // var startdown = 6;
@@ -95,7 +97,9 @@ var timeConverter = function() {
 var timeBarConverter = function () {
     return (timeLeft * 100 / 30);
 }
-    
+ 
+
+//Step Two:
 //  The run function starts it off
 function run() {
     // DONE: Use setInterval to start the count here and set the clock to running.
@@ -149,6 +153,8 @@ function run() {
     }
 }
 
+
+//Step Three:
 function pushAnswer() {
     for(let i = 0; i < qsAndAs.length; i++) {
         if($('#question h3').html() == (qsAndAs[i].question)) {
@@ -159,7 +165,7 @@ function pushAnswer() {
     threeSecondBreak()    
 }
 
-
+//Step Four:
 function threeSecondBreak() {
     $('div.progress-bar').attr('style', 'width: 100%');
     var shortBreak = 4;
@@ -190,6 +196,7 @@ function threeSecondBreak() {
     lilrun();
 }
 
+//Step Five:
 function nextQuestion() {
     for(let i = 0; i < qsAndAs.length; i++) {
         $('#question h3').text(qsAndAs[i].question);
@@ -202,7 +209,7 @@ function nextQuestion() {
     $('#answers').on('click', threeSecondBreak()); 
 }
         
-//Load first question
+//Eventually need to track responses:
 
 let guesses = [];
 const answerCheck = {a: 0, b: 1, c: 2, d: 3};
