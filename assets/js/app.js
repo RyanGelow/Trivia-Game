@@ -137,7 +137,7 @@ function fiveSecondCountdown() {
 function start() {
     var time = 15;
     var intervalId;
-    $('div.progress-bar').attr('style', 'width: 100%').addClass('btn-primary').removeClass('btn-warning btn-danger');
+    $('div.progress-bar').attr('style', 'width: 100%').addClass('bg-primary').removeClass('bg-warning bg-danger');
     $('#timer .timeLeft').text('15');
     $('#question h3').text(qsAndAs[questionIndex].question);
     $('#answer1').text(qsAndAs[questionIndex].answers[0]);
@@ -156,15 +156,15 @@ function start() {
         $('#timer .timeLeft').text(time);
         $('div.progress-bar').attr('style', 'width: '+ (time * 100 / 15) + '%');
         if(time < 16) {
-            $(`.progress-bar`).addClass('btn-primary').removeClass('btn-warning btn-danger');
+            $(`.progress-bar`).addClass('bg-primary').removeClass('bg-warning bg-danger');
         }if(time < 10) {
             $('#timer .timeLeft').text("0" + time);
         }
         if(time < 9) {
-            $(`.progress-bar`).addClass(`bg-warning`).removeClass('btn-primary btn-danger');
+            $(`.progress-bar`).addClass(`bg-warning`).removeClass('bg-primary bg-danger');
         }
         if(time < 5) {
-            $(`.progress-bar`).addClass(`bg-danger`).removeClass('btn-primary btn-warning');
+            $(`.progress-bar`).addClass(`bg-danger`).removeClass('bg-primary bg-warning');
         }
         if(time === 0) {
             stop();
