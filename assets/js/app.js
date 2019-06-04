@@ -65,13 +65,17 @@ let guesses = [];
 let score = 0;
 let questionIndex=0
 
-$('#start').on('click', fiveSecondCountdown);
+$('#start').one('click', fiveSecondCountdown);
 
 
 //Step One:
 function fiveSecondCountdown() {
     var startdown = 6;
     var intervalId;
+    $('.next').text();
+    $('.reward').text();
+    $(`.container .break`).removeClass('invisible');
+    $('#start').addClass('invisible');
     function lilrun() {
         clearInterval(intervalId);
         intervalId = setInterval(decrement, 1000);
@@ -137,6 +141,9 @@ function fiveSecondCountdown() {
 function start() {
     var time = 15;
     var intervalId;
+    $('.next').text();
+    $('.reward').text();
+    $(`.container .break`).removeClass('invisible');
     $('div.progress-bar').attr('style', 'width: 100%').addClass('bg-primary').removeClass('bg-warning bg-danger');
     $('#timer .timeLeft').text('15');
     $('#question h3').text(qsAndAs[questionIndex].question);
@@ -188,9 +195,7 @@ function fiveSecondBreak() {
     var intervalId;
     
     if(guesses[questionIndex] == qsAndAs[questionIndex].correctIndexAnswer) {
-        console.log("passes second test");
         score++;
-        console.log(score);
         $('.score').html(`<p>Correct Answers: ${score}</p>`)
     }else{
         $(`#answers button[index=${guesses[questionIndex]}]`).removeClass(`btn-outline-dark`).addClass(`btn-danger`);
@@ -203,10 +208,18 @@ function fiveSecondBreak() {
     }
     function decrement() {
         startdown--;
-        $('.next').html(`<p>Next question in ${startdown}</p>`);
-        if (startdown === 0) {
-            breaksOver();
-        }
+        console.log("QIndex : " + (parseInt(questionIndex) + 2));
+        console.log("qsAndAs.length: " + qsAndAs.length); 
+        console.log((parseInt(questionIndex) + 2) === qsAndAs.length);
+        if((parseInt(questionIndex) + 2) < qsAndAs.length){
+            $('.next').html(`<p>Next question in ${startdown}</p>`);
+        }if((parseInt(questionIndex) + 2) === qsAndAs.length){
+            $('.next').html(`<p>Last question in ${startdown}</p>`);
+        }if((parseInt(questionIndex) + 1) === qsAndAs.length){
+            $('.next').html(`<p>Trivia Game Over - Calculating...</p>`);
+        }if (startdown === 0) {
+            breaksOver(); 
+        } 
     }
     function breaksOver() {
         clearInterval(intervalId);
@@ -224,21 +237,20 @@ function fiveSecondBreak() {
 }
 
 function gameOver() {
-    $('.next').text(`Trivia Game Over`);
+    $('#start').removeClass('invisible');
+    $('#start').one('click', fiveSecondCountdown)    
+    $(`.container .break`).addClass('invisible');
+    $('.next').text(`Trivia Game Over - ${score} out of ${qsAndAs.length}`);
     if(score <= qsAndAs.length/2) {
         $('.next').append(` - Failed`);
         $(`.reward img`).attr(`src`, `./assets/images/uhh.gif`);
     }if((score > qsAndAs.length / 2)&(score < qsAndAs.length * 3 / 5)) {
-        $('.next').append(` - Perfect Score!`);
         $(`.reward img`).attr(`src`, `./assets/images/shhh.gif`);
     }if((score >= qsAndAs.length * 3 / 5)&(score < qsAndAs.length * 2 / 3)) {
-        $('.next').append(` - Perfect Score!`);
         $(`.reward img`).attr(`src`, `./assets/images/so-so.gif`)
     }if((score >= qsAndAs.length * 2 / 3)&(score < qsAndAs.length * 4 / 5)) {
-        $('.next').append(` - Perfect Score!`);
         $(`.reward img`).attr(`src`, `./assets/images/dance.gif`)
     }if((score >= qsAndAs.length * 4 / 5)&(score < qsAndAs.length)) {
-        $('.next').append(` - Perfect Score!`);
         $(`.reward img`).attr(`src`, `./assets/images/kinda.gif`)
     }if(score === qsAndAs.length) {
         $('.next').append(` - Perfect Score!`);
