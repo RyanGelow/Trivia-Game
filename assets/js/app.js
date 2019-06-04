@@ -1,6 +1,6 @@
 const qsAndAs = [
     {
-        question: "Which two Warriors are the two leading three-point shooters in Warriors history?",
+        question: "Which are the two leading three-point shooters in Warriors history?",
         answers: ["Iguodala & Durant", "Curry & Durant", "Thompson & Curry", "Durant & Cousins"],
         correctIndexAnswer: 2
     },
@@ -10,7 +10,7 @@ const qsAndAs = [
         correctIndexAnswer: 3
     },
     {
-        question: "What current Warrior has 22 career triple-doubles?",
+        question: "As of the end of the 2018-19 season, which current Warrior has 22 career triple-doubles?",
         answers: [ "Draymond Green", "Kevin Durant", "Steph Curry", "Andre Iguodala"],
         correctIndexAnswer: 0
     },
@@ -225,7 +225,23 @@ function fiveSecondBreak() {
 
 function gameOver() {
     $('.next').text(`Trivia Game Over`);
-    if(score === qsAndAs.length) {
+    if(score <= qsAndAs.length/2) {
+        $('.next').append(` - Failed`);
+        $(`.reward img`).attr(`src`, `./assets/images/uhh.gif`);
+    }if((score > qsAndAs.length / 2)&(score < qsAndAs.length * 3 / 5)) {
         $('.next').append(` - Perfect Score!`);
+        $(`.reward img`).attr(`src`, `./assets/images/shhh.gif`);
+    }if((score >= qsAndAs.length * 3 / 5)&(score < qsAndAs.length * 2 / 3)) {
+        $('.next').append(` - Perfect Score!`);
+        $(`.reward img`).attr(`src`, `./assets/images/so-so.gif`)
+    }if((score >= qsAndAs.length * 2 / 3)&(score < qsAndAs.length * 4 / 5)) {
+        $('.next').append(` - Perfect Score!`);
+        $(`.reward img`).attr(`src`, `./assets/images/dance.gif`)
+    }if((score >= qsAndAs.length * 4 / 5)&(score < qsAndAs.length)) {
+        $('.next').append(` - Perfect Score!`);
+        $(`.reward img`).attr(`src`, `./assets/images/kinda.gif`)
+    }if(score === qsAndAs.length) {
+        $('.next').append(` - Perfect Score!`);
+        $(`.reward img`).attr(`src`, `./assets/images/steph-wins.gif`);
     }
 }
