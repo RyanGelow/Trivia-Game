@@ -1,58 +1,75 @@
 const qsAndAs = [
     {
-        question: "Which ocean is the largest?",
-        answers: ["Atlantic", "Pacific", "Indian", "Arctic"],
-        correctIndexAnswer: 1
-    },
-    {
-        question: "What is 12 x 5?",
-        answers: ["40", "50", "60", "70"],
+        question: "Which two Warriors are the two leading three-point shooters in Warriors history?",
+        answers: ["Iguodala & Durant", "Curry & Durant", "Thompson & Curry", "Durant & Cousins"],
         correctIndexAnswer: 2
     },
     {
-        question: "How much is 1 ton?",
-        answers: [ "2,000 lbs.", "2,000 kg.", "2,000 slugs", "1,000 lbs."],
-        correctIndexAnswer: 0
-    },
-    {
-        question: "Which lore is most common about vampires?",
-        answers: ["They can be killed with silver bullets", "They eat people whole", "They are reanimated with electricity", "They are vulnerable to Garlic"],
+        question: "What are those two players known as?",
+        answers: ["The Snipe Shooters", "The Bad Bombers", "The Slick Assassins", "The Splash Brothers"],
         correctIndexAnswer: 3
     },
     {
-        question: "Which of the following colors is closest to white?",
-        answers: ["Pearl", "Eggshell", "Ivory", "Vanilla"],
+        question: "What current Warrior has 22 career triple-doubles?",
+        answers: [ "Draymond Green", "Kevin Durant", "Steph Curry", "Andre Iguodala"],
         correctIndexAnswer: 0
-    }
+    },
+    {
+        question: 'Which current Warrior left Oklahoma City to start his "next chapter" with Golden State?',
+        answers: ["Andrew Bogut", "Jonas Jerebko", "DeMarcus Cousins", "Kevin Durant"],
+        correctIndexAnswer: 3
+    },
+    {
+        question: "How many games did the Warriors win in 2015-16?",
+        answers: ["70", "68", "73", "74"],
+        correctIndexAnswer: 2
+    },
+    {
+        question: "What Warriors star won the NBA dunk contest in 2002 and 2003?",
+        answers: ["Jason Richardson", "Baron Davis", "Antawn Jamison", "Adonal Foyle"],
+        correctIndexAnswer: 0
+    },
+    {
+        question: "What is depicted on the current logo of the Golden State Warriors?",
+        answers: ["The Oakland Tree", "The Bay Bridge", "The Golden Gate Bridge", "The Cable Car"],
+        correctIndexAnswer: 1
+    },
+    {
+        question: "Who is the current coach of the Warriors?",
+        answers: ["Steve Blur", "Peter Guber", "Steve Kerr", "Joe Lacob"],
+        correctIndexAnswer: 2
+    },
+    {
+        question: "Which player choked coach P. J. Carlesimo during a 1997 practice?",
+        answers: ["Chris Mullin", "Bimbo Coles", "Donyell Marshall", "Latrell Spreewell"],
+        correctIndexAnswer: 3
+    },
+    {
+        question: "Which player was not part of legendary Run TMC?",
+        answers: ["Chamberlain", "Richmond", "Mullin", "Hardaway"],
+        correctIndexAnswer: 0
+    },
+    {
+        question: "Who was named NBA Finals MVP in 2015?",
+        answers: ["Curry", "Thompson", "Iguodala", "Green"],
+        correctIndexAnswer: 2
+    },
+    {
+        question: "What city did the Warriors play in from 1946-1962?",
+        answers: ["Dallas", "Houston", "Memphis", "Philadelphia"],
+        correctIndexAnswer: 3
+    },
 ]
 
-// function trivia () {
-//     const output = [];
-//     qsAndAs.forEach((currentQuestion, questionNumber) => {
-//         const answers = [];
-//         for(letter in currentQuestion, answers) {
-//             answers.push(
-//                 `<label>
-//                     <input type="radio" name="question${questionNumber}" value="${letter}">
-//                     ${letter} :
-//                     ${currentQuestion.answers[letter]}
-//                 </label>`
-//             );
-//         }
-//         output.push(
-//             `<div class="question"> ${currentQuestion.question} </div>
-//             <div class="answers"> ${answers.join('')} </div>`
-//         );
-//     })
-// }
+let guesses = [];
+let score = 0;
+let questionIndex=0
 
-//  When the start button is clicked, execute the run function.
 $('#start').on('click', fiveSecondCountdown);
 
 
 //Step One:
 function fiveSecondCountdown() {
-    // clearInterval(intervalId);
     // var startdown = 6;
     // var intervalId;
     // function lilrun() {
@@ -72,147 +89,102 @@ function fiveSecondCountdown() {
     // }
     // function stop() {
     //     clearInterval(intervalId);
-        run(); 
+        start(); 
     // }
     // lilrun();
 }
 
-
-
-//  Variable that will hold our interval ID when we execute the "run" function
-var intervalId;
-
-
-//Time for each question
-var timeLeft = 30;
-//timer always in 2 digits
-var timeConverter = function() {
-    if(timeLeft < 10) {   
-        return "0" + timeLeft;
-    }else{
-        return timeLeft;
-    };
-};
-//run bar down 1 sec at a time
-var timeBarConverter = function () {
-    return (timeLeft * 100 / 30);
-}
- 
-
-//Step Two:
-//  The run function starts it off
-function run() {
-    // DONE: Use setInterval to start the count here and set the clock to running.
+//Step One Part Two:
+function start() {
+    var time = 15;
+    var intervalId;
     $('div.progress-bar').attr('style', 'width: 100%');
-    $('#timer .timeLeft').text(timeConverter);  
-    intervalId = setInterval(decrement, 1000);
-    //  The decrement function.
-    function decrement() {
-        //  Decrease number by one.
-        timeLeft--;
-        timeConverter();
-        $('#timer .timeLeft').text(timeConverter);   
-        //Timer bar countdown matching timer
-        $('div.progress-bar').attr('style', 'width: ' + timeBarConverter() + '%');
-        // if(timeBarConverter < 34) {
-        //     $('div.progress-bar').addClass('bg-danger');
-        // }if(timeBarConverter >= 34) {
-        //     $('div.progress-bar').removeClass('bg-danger');
-        // }
-        
-        //  Once number hits zero...       
-        if (timeLeft === 0) {
-            //  ...run the stop function.
-            clearInterval(intervalId); 
-            stop();
-            
-            //Missed question count and move on to next question
-            
-            //If last question end game
-        };
-    }
-    
-    
-    //  The stop function
-    function stop() {
-        
-        //  Clears our intervalId - pass the name of the interval to the clearInterval function.
+    $('#timer .timeLeft').text('15');
+    $('#question h3').text(qsAndAs[questionIndex].question);
+    $('#answer1').text(qsAndAs[questionIndex].answers[0]);
+    $('#answer2').text(qsAndAs[questionIndex].answers[1]);
+    $('#answer3').text(qsAndAs[questionIndex].answers[2]);
+    $('#answer4').text(qsAndAs[questionIndex].answers[3]);
+
+    function gameOn() {
         clearInterval(intervalId);
-        pushAnswer();
-    };
-    //Load questions and answers
-    
-    $('#question h3').text(qsAndAs[0].question);
-    $('#answer1').text(qsAndAs[0].answers[0]);
-    $('#answer2').text(qsAndAs[0].answers[1]);
-    $('#answer3').text(qsAndAs[0].answers[2]);
-    $('#answer4').text(qsAndAs[0].answers[3]);
+        intervalId = setInterval(decrement, 1000);
+        $('#answers').one('click','button', stop);
 
-    if($('.answers').on('click')){
-        stop();
     }
-}
-
-
-//Step Three:
-function pushAnswer() {
-    for(let i = 0; i < qsAndAs.length; i++) {
-        if($('#question h3').html() == (qsAndAs[i].question)) {
-            guesses.push(qsAndAs[i].answers);
-            console.log(guesses);
+    function decrement() {
+        time--;
+        $('#timer .timeLeft').text(time);
+        $('div.progress-bar').attr('style', 'width: '+ (time * 100 / 15) + '%');
+        if(time < 10) {
+            $('#timer .timeLeft').text("0" + time);
+        }
+        if(time < 8) {
+            $(`.progress-bar`).addClass(`bg-warning`)
+        }
+        if(time < 4) {
+            $(`.progress-bar`).removeClass(`bg-warning`).addClass(`bg-danger`)
+        }
+        if(time === 0) {
+            stop();
         }
     }
-    threeSecondBreak()    
+
+    function stop() {
+        clearInterval(intervalId);
+        guesses.push($(this).attr('index'));
+        fiveSecondBreak()
+    }
+
+    gameOn();
 }
 
-//Step Four:
-function threeSecondBreak() {
-    $('div.progress-bar').attr('style', 'width: 100%');
-    var shortBreak = 4;
+//Step Two Part One:
+function fiveSecondBreak() {
+    $(`#answers button[index=${qsAndAs[questionIndex].correctIndexAnswer}]`).removeClass(`btn-outline-dark`).addClass(`btn-success`);
+    
+    var startdown = 6;
     var intervalId;
-    //run bar down 1 sec at a time
-    function threeBarConverter () {
-        return (shortBreak * 100 / 4);
+    
+    if(guesses[questionIndex] == qsAndAs[questionIndex].correctIndexAnswer) {
+        console.log("passes second test");
+        score++;
+        console.log(score);
+        $('.score').html(`<p>Correct Answers: ${score}</p>`)
+    }else{
+        $(`#answers button[index=${guesses[questionIndex]}]`).removeClass(`btn-outline-dark`).addClass(`btn-danger`);
+        $('.score').html(`<p>Correct Answers: ${score}</p>`)
     }
-    function lilrun() {
+    
+    function lilBreak() {
+        clearInterval(intervalId);
         intervalId = setInterval(decrement, 1000);
     }
     function decrement() {
-        shortBreak--;
-        $('#question h3').text('Next question in ' + shortBreak);
-        $('div.progress-bar').attr('style', 'width: ' + threeBarConverter() + '%');
-        if(threeBarConverter < 34) {
-            $('div.progress-bar').addClass('bg-danger');
-        }if(threeBarConverter >= 34) {
-            $('div.progress-bar').removeClass('bg-danger');
-        }if (shortBreak === 0) {
-            stop();
+        startdown--;
+        $('.next').html(`<p>Next question in ${startdown}</p>`);
+        if (startdown === 0) {
+            breaksOver();
         }
     }
-    function stop() {
+    function breaksOver() {
         clearInterval(intervalId);
-        nextQuestion();
+        questionIndex += 1;
+        $('.next').text(``);
+        $(`button.answer`).removeClass(`btn-success btn-danger`).addClass(`btn-outline-dark`);
+        if(questionIndex >= qsAndAs.length) {
+            gameOver();
+            clearInterval(intervalId);
+        }else{
+            start();
+        } 
     }
-    lilrun();
+    lilBreak();
 }
 
-//Step Five:
-function nextQuestion() {
-    for(let i = 0; i < qsAndAs.length; i++) {
-        $('#question h3').text(qsAndAs[i].question);
-        $('#answer1').text(qsAndAs[i].answers[0]);
-        $('#answer2').text(qsAndAs[i].answers[1]);
-        $('#answer3').text(qsAndAs[i].answers[2]);
-        $('#answer4').text(qsAndAs[i].answers[3]);
+function gameOver() {
+    $('.next').text(`Trivia Game Over`);
+    if(score === qsAndAs.length) {
+        $('.next').append(` - Perfect Score!`);
     }
-    
-    $('#answers').on('click', threeSecondBreak()); 
 }
-        
-//Eventually need to track responses:
-
-let guesses = [];
-const answerCheck = {a: 0, b: 1, c: 2, d: 3};
-let score = 0;
-
-//Submit Answer
