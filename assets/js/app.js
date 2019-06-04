@@ -79,11 +79,50 @@ function fiveSecondCountdown() {
     function decrement() {
         startdown--;
         $('#question h3').text('First question in ' + startdown);
-        if (!startdown%2 == 0) {
+        if(startdown === 6) {
+            $('#answer1').addClass('btn-primary');
+            $('#answer2').addClass('btn-warning');
+            $('#answer3').addClass('btn-primary');
+            $('#answer4').addClass('btn-warning');
+        }if(startdown === 5) {
+            $('#answer1').addClass('btn-warning').removeClass('btn-primary');
+            $('#answer2').addClass('btn-primary').removeClass('btn-warning');
+            $('#answer3').addClass('btn-warning').removeClass('btn-primary');
+            $('#answer4').addClass('btn-primary').removeClass('btn-warning');
             $('div.progress-bar').attr('style', 'width: 100%');
-        }if (startdown%2 == 0) {
+        }if(startdown === 4) {
+            $('#answer1').addClass('btn-primary').removeClass('btn-warning');
+            $('#answer2').addClass('btn-warning').removeClass('btn-primary');
+            $('#answer3').addClass('btn-primary').removeClass('btn-warning');
+            $('#answer4').addClass('btn-warning').removeClass('btn-primary');
             $('div.progress-bar').attr('style', 'width: 0%');
+        }if(startdown === 3) {
+            $('#answer1').addClass('btn-warning').removeClass('btn-primary');
+            $('#answer2').addClass('btn-primary').removeClass('btn-warning');
+            $('#answer3').addClass('btn-warning').removeClass('btn-primary');
+            $('#answer4').addClass('btn-primary').removeClass('btn-warning');
+            $('div.progress-bar').attr('style', 'width: 100%').addClass('bg-warning');
+        }if(startdown === 2) {
+            $('#answer1').addClass('btn-primary').removeClass('btn-warning');
+            $('#answer2').addClass('btn-warning').removeClass('btn-primary');
+            $('#answer3').addClass('btn-primary').removeClass('btn-warning');
+            $('#answer4').addClass('btn-warning').removeClass('btn-primary');
+            $('div.progress-bar').attr('style', 'width: 0%');
+
+        }if(startdown === 1) {
+            $('#answer1').addClass('btn-warning').removeClass('btn-primary');
+            $('#answer2').addClass('btn-primary').removeClass('btn-warning');
+            $('#answer3').addClass('btn-warning').removeClass('btn-primary');
+            $('#answer4').addClass('btn-primary').removeClass('btn-warning');
+            $('div.progress-bar').attr('style', 'width: 100%').removeClass('bg-warning');
+        
         }if (startdown === 0) {
+            $('#answer1').removeClass('btn-warning');
+            $('#answer2').removeClass('btn-primary');
+            $('#answer3').removeClass('btn-warning');
+            $('#answer4').removeClass('btn-primary');
+            $('div.progress-bar').attr('style', 'width: 0%');
+        
             stop();
         }
     }
@@ -98,7 +137,7 @@ function fiveSecondCountdown() {
 function start() {
     var time = 15;
     var intervalId;
-    $('div.progress-bar').attr('style', 'width: 100%');
+    $('div.progress-bar').attr('style', 'width: 100%').addClass('btn-primary').removeClass('btn-warning btn-danger');
     $('#timer .timeLeft').text('15');
     $('#question h3').text(qsAndAs[questionIndex].question);
     $('#answer1').text(qsAndAs[questionIndex].answers[0]);
@@ -116,14 +155,16 @@ function start() {
         time--;
         $('#timer .timeLeft').text(time);
         $('div.progress-bar').attr('style', 'width: '+ (time * 100 / 15) + '%');
-        if(time < 10) {
+        if(time < 16) {
+            $(`.progress-bar`).addClass('btn-primary').removeClass('btn-warning btn-danger');
+        }if(time < 10) {
             $('#timer .timeLeft').text("0" + time);
         }
-        if(time < 8) {
-            $(`.progress-bar`).addClass(`bg-warning`)
+        if(time < 9) {
+            $(`.progress-bar`).addClass(`bg-warning`).removeClass('btn-primary btn-danger');
         }
-        if(time < 4) {
-            $(`.progress-bar`).removeClass(`bg-warning`).addClass(`bg-danger`)
+        if(time < 5) {
+            $(`.progress-bar`).addClass(`bg-danger`).removeClass('btn-primary btn-warning');
         }
         if(time === 0) {
             stop();
