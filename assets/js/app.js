@@ -70,28 +70,28 @@ $('#start').on('click', fiveSecondCountdown);
 
 //Step One:
 function fiveSecondCountdown() {
-    // var startdown = 6;
-    // var intervalId;
-    // function lilrun() {
-    //     clearInterval(intervalId);
-    //     intervalId = setInterval(decrement, 1000);
-    // }
-    // function decrement() {
-    //     startdown--;
-    //     $('#question h3').text('First question in ' + startdown);
-    //     if (!startdown%2 == 0) {
-    //         $('div.progress-bar').attr('style', 'width: 100%');
-    //     }if (startdown%2 == 0) {
-    //         $('div.progress-bar').attr('style', 'width: 0%');
-    //     }if (startdown === 0) {
-    //         stop();
-    //     }
-    // }
-    // function stop() {
-    //     clearInterval(intervalId);
+    var startdown = 6;
+    var intervalId;
+    function lilrun() {
+        clearInterval(intervalId);
+        intervalId = setInterval(decrement, 1000);
+    }
+    function decrement() {
+        startdown--;
+        $('#question h3').text('First question in ' + startdown);
+        if (!startdown%2 == 0) {
+            $('div.progress-bar').attr('style', 'width: 100%');
+        }if (startdown%2 == 0) {
+            $('div.progress-bar').attr('style', 'width: 0%');
+        }if (startdown === 0) {
+            stop();
+        }
+    }
+    function stop() {
+        clearInterval(intervalId);
         start(); 
-    // }
-    // lilrun();
+    }
+    lilrun();
 }
 
 //Step One Part Two:
