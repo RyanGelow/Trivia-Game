@@ -13,7 +13,7 @@
         <h1 class="text-center py-3">Timed Trivia Game - Warriors Edition</h1>
         <div class="row">
             <div class="col mx-auto">
-                <button id="start" type="button" class="btn btn-primary">Start Game!</button>
+                <button id="start" type="button" class="btn btn-primary" data-toggle="collapse" href="#singleCollapseQuiz" role="button" aria-expanded="false" aria-controls="singleCollapseQuiz">Start Game!</button>
             </div>
             <div class="col-md-8 col-sm-6 col-xs-2" id="time-bar">
                 <div class="progress my-3" style="height: 20px;">
@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div>
-        <div class="container break">
+        <div class="container break collapse" id="singleCollapseQuiz">
             <div id="question" class="text-center my-3">
                 <h3 class="questions">Are you ready?</h3>
             </div>
@@ -38,14 +38,13 @@
                 <button type="button" id="answer4" class="btn btn-outline-dark btn-lg btn-block answer" index="3">Answer 4</button>
             </div>
         </div>
-        <div class="reward text-center my-3">
-            <img src="">
-        </div>
         <div class="next text-center my-3">
-
+            
         </div>
         <div class="score text-center my-3">
-
+            
+        </div>
+        <div class="reward text-center">
         </div>
     </div>
 

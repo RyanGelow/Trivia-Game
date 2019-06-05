@@ -75,9 +75,8 @@ function fiveSecondCountdown() {
     questionIndex=0
     var startdown = 6;
     var intervalId;
-    $('.next').text();
-    $('.reward').text();
-    $(`.container .break`).removeClass('invisible hidden');
+    $('.next').text('');
+    $(`.reward`).attr(`src`, ``);
     $('#start').addClass('invisible');
     function lilrun() {
         clearInterval(intervalId);
@@ -146,7 +145,6 @@ function start() {
     var intervalId;
     $('.next').text('');
     $('.reward').text('');
-    $(`.container .break`).removeClass('invisible hidden');
     $('div.progress-bar').attr('style', 'width: 100%').addClass('bg-primary').removeClass('bg-warning bg-danger');
     $('#timer .timeLeft').text('15');
     $('#question h3').text(qsAndAs[questionIndex].question);
@@ -241,22 +239,32 @@ function fiveSecondBreak() {
 
 function gameOver() {
     $('#start').removeClass('invisible');
-    $('#start').one('click', fiveSecondCountdown); 
-    $(`.container .break`).addClass('invisible hidden');
     $('.next').text(`Trivia Game Over - ${score} out of ${qsAndAs.length}`);
+    $('.score').text('');
+    const img = $('<img>');
+    $('.reward').append(img).attr('src','');
+    $('#singleCollapseQuiz').removeClass('show');
+    $('#start').one('click', fiveSecondCountdown); 
     if(score <= qsAndAs.length/2) {
         $('.next').append(` - Failed`);
         $(`.reward img`).attr(`src`, `./assets/images/uhh.gif`);
+        console.log(1);
     }if((score > qsAndAs.length / 2)&(score < qsAndAs.length * 3 / 5)) {
         $(`.reward img`).attr(`src`, `./assets/images/shhh.gif`);
+        console.log(2);
     }if((score >= qsAndAs.length * 3 / 5)&(score < qsAndAs.length * 2 / 3)) {
-        $(`.reward img`).attr(`src`, `./assets/images/so-so.gif`)
+        $(`.reward img`).attr(`src`, `./assets/images/so-so.gif`);
+        console.log(3);
     }if((score >= qsAndAs.length * 2 / 3)&(score < qsAndAs.length * 4 / 5)) {
-        $(`.reward img`).attr(`src`, `./assets/images/dance.gif`)
+        $(`.reward img`).attr(`src`, `./assets/images/dance.gif`);
+        
+        console.log(4);
     }if((score >= qsAndAs.length * 4 / 5)&(score < qsAndAs.length)) {
-        $(`.reward img`).attr(`src`, `./assets/images/kinda.gif`)
+        $(`.reward img`).attr(`src`, `./assets/images/kinda.gif`);
+        console.log(5);
     }if(score === qsAndAs.length) {
         $('.next').append(` - Perfect Score!`);
         $(`.reward img`).attr(`src`, `./assets/images/steph-wins.gif`);
+        console.log(6);
     }
 }
