@@ -72,7 +72,7 @@ $('#start').one('click', fiveSecondCountdown);
 function fiveSecondCountdown() {
     guesses = [];
     score = 0;
-    questionIndex=0
+    questionIndex = 0
     var startdown = 6;
     var intervalId;
     $('.next').text('');
@@ -85,49 +85,29 @@ function fiveSecondCountdown() {
     function decrement() {
         startdown--;
         $('#question h3').text('First question in ' + startdown);
-        if(startdown === 6) {
-            $('#answer1').addClass('btn-primary');
-            $('#answer2').addClass('btn-warning');
-            $('#answer3').addClass('btn-primary');
-            $('#answer4').addClass('btn-warning');
-        }if(startdown === 5) {
+        if(startdown % 2 == 0) {
+            $('#answer1').addClass('btn-primary').removeClass('btn-warning');
+            $('#answer2').addClass('btn-warning').removeClass('btn-primary');
+            $('#answer3').addClass('btn-primary').removeClass('btn-warning');
+            $('#answer4').addClass('btn-warning').removeClass('btn-primary');
+            $('div.progress-bar').attr('style', 'width: 0%');
+        }if((startdown + 1) % 2 == 0) {
             $('#answer1').addClass('btn-warning').removeClass('btn-primary');
             $('#answer2').addClass('btn-primary').removeClass('btn-warning');
             $('#answer3').addClass('btn-warning').removeClass('btn-primary');
             $('#answer4').addClass('btn-primary').removeClass('btn-warning');
             $('div.progress-bar').attr('style', 'width: 100%');
-        }if(startdown === 4) {
-            $('#answer1').addClass('btn-primary').removeClass('btn-warning');
-            $('#answer2').addClass('btn-warning').removeClass('btn-primary');
-            $('#answer3').addClass('btn-primary').removeClass('btn-warning');
-            $('#answer4').addClass('btn-warning').removeClass('btn-primary');
-            $('div.progress-bar').attr('style', 'width: 0%');
         }if(startdown === 3) {
-            $('#answer1').addClass('btn-warning').removeClass('btn-primary');
-            $('#answer2').addClass('btn-primary').removeClass('btn-warning');
-            $('#answer3').addClass('btn-warning').removeClass('btn-primary');
-            $('#answer4').addClass('btn-primary').removeClass('btn-warning');
-            $('div.progress-bar').attr('style', 'width: 100%').addClass('bg-warning');
-        }if(startdown === 2) {
-            $('#answer1').addClass('btn-primary').removeClass('btn-warning');
-            $('#answer2').addClass('btn-warning').removeClass('btn-primary');
-            $('#answer3').addClass('btn-primary').removeClass('btn-warning');
-            $('#answer4').addClass('btn-warning').removeClass('btn-primary');
-            $('div.progress-bar').attr('style', 'width: 0%');
-
+            $('div.progress-bar').addClass('bg-warning');
         }if(startdown === 1) {
-            $('#answer1').addClass('btn-warning').removeClass('btn-primary');
-            $('#answer2').addClass('btn-primary').removeClass('btn-warning');
-            $('#answer3').addClass('btn-warning').removeClass('btn-primary');
-            $('#answer4').addClass('btn-primary').removeClass('btn-warning');
             $('div.progress-bar').attr('style', 'width: 100%').removeClass('bg-warning').addClass('bg-danger');
         
         }if (startdown === 0) {
-            $('#answer1').removeClass('btn-warning');
-            $('#answer2').removeClass('btn-primary');
-            $('#answer3').removeClass('btn-warning');
-            $('#answer4').removeClass('btn-primary');
-            $('div.progress-bar').attr('style', 'width: 0%').removeClass('bg-danger');
+            $('#answer1').removeClass('btn-primary btn-warning');
+            $('#answer2').removeClass('btn-primary btn-warning');
+            $('#answer3').removeClass('btn-primary btn-warning');
+            $('#answer4').removeClass('btn-primary btn-warning');
+            $('div.progress-bar').removeClass('bg-danger');
         
             stop();
         }
