@@ -70,11 +70,14 @@ $('#start').one('click', fiveSecondCountdown);
 
 //Step One:
 function fiveSecondCountdown() {
+    guesses = [];
+    score = 0;
+    questionIndex=0
     var startdown = 6;
     var intervalId;
     $('.next').text();
     $('.reward').text();
-    $(`.container .break`).removeClass('invisible');
+    $(`.container .break`).removeClass('invisible hidden');
     $('#start').addClass('invisible');
     function lilrun() {
         clearInterval(intervalId);
@@ -118,14 +121,14 @@ function fiveSecondCountdown() {
             $('#answer2').addClass('btn-primary').removeClass('btn-warning');
             $('#answer3').addClass('btn-warning').removeClass('btn-primary');
             $('#answer4').addClass('btn-primary').removeClass('btn-warning');
-            $('div.progress-bar').attr('style', 'width: 100%').removeClass('bg-warning');
+            $('div.progress-bar').attr('style', 'width: 100%').removeClass('bg-warning').addClass('bg-danger');
         
         }if (startdown === 0) {
             $('#answer1').removeClass('btn-warning');
             $('#answer2').removeClass('btn-primary');
             $('#answer3').removeClass('btn-warning');
             $('#answer4').removeClass('btn-primary');
-            $('div.progress-bar').attr('style', 'width: 0%');
+            $('div.progress-bar').attr('style', 'width: 0%').removeClass('bg-danger');
         
             stop();
         }
@@ -141,9 +144,9 @@ function fiveSecondCountdown() {
 function start() {
     var time = 15;
     var intervalId;
-    $('.next').text();
-    $('.reward').text();
-    $(`.container .break`).removeClass('invisible');
+    $('.next').text('');
+    $('.reward').text('');
+    $(`.container .break`).removeClass('invisible hidden');
     $('div.progress-bar').attr('style', 'width: 100%').addClass('bg-primary').removeClass('bg-warning bg-danger');
     $('#timer .timeLeft').text('15');
     $('#question h3').text(qsAndAs[questionIndex].question);
@@ -238,8 +241,8 @@ function fiveSecondBreak() {
 
 function gameOver() {
     $('#start').removeClass('invisible');
-    $('#start').one('click', fiveSecondCountdown)    
-    $(`.container .break`).addClass('invisible');
+    $('#start').one('click', fiveSecondCountdown); 
+    $(`.container .break`).addClass('invisible hidden');
     $('.next').text(`Trivia Game Over - ${score} out of ${qsAndAs.length}`);
     if(score <= qsAndAs.length/2) {
         $('.next').append(` - Failed`);
